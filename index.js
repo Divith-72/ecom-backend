@@ -1,18 +1,26 @@
+// FoodLoop – A Full-Stack MERN Online Food Ordering System (Backend)
+
 const express = require("express");
-const ProductRoute = require("./routes/productRoute")
-const UserRoute = require("./routes/userRoute")
+const CartRoute = require("./routes/cartRoute");
+const FoodRoute = require("./routes/foodRoute");
 const dotenv = require("dotenv");
 const connectdb = require("./config/db");
+
 dotenv.config();
 connectdb();
+
 const app = express();
 
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", ProductRoute);
-app.use("/api/user",UserRoute);
+// Routes
+app.use("/api", CartRoute);
+app.use("/api", FoodRoute);
+
+// Server start
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`🍔 FoodLoop Backend Server is running on port ${PORT}`);
 });
